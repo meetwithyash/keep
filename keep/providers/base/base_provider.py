@@ -56,6 +56,22 @@ class BaseProvider(metaclass=abc.ABCMeta):
         Args:
             **kwargs (dict): The provider context (with statement)
         """
+        self.logger.debug(
+            "Notifying provider", extra={"provider": self.__class__.__name__}
+        )
+        notify_results = self._notify(**kwargs)
+        self.logger.debug(
+            "Provider notified", extra={"provider": self.__class__.__name__}
+        )
+        return notify_results
+
+    def _notify(self, **kwargs):
+        """
+        Output alert message.
+
+        Args:
+            **kwargs (dict): The provider context (with statement)
+        """
         raise NotImplementedError("notify() method not implemented")
 
     def query(self, **kwargs: dict):
@@ -68,4 +84,23 @@ class BaseProvider(metaclass=abc.ABCMeta):
         Raises:
             NotImplementedError: _description_
         """
-        raise NotImplementedError("query() method not implemented")
+        self.logger.debug(
+            "Querying provider", extra={"provider": self.__class__.__name__}
+        )
+        query_result = self._query(**kwargs)
+        self.logger.debug(
+            "Provider query complete", extra={"provider": self.__class__.__name__}
+        )
+        return query_result
+
+    def _query(self, **kwargs: dict):
+        """
+        Query the provider using the given query
+
+        Args:
+            kwargs (dict): The provider context (with statement)
+
+        Raises:
+            NotImplementedError: _description_
+        """
+        raise NotImplementedError("_query() method not implemented")

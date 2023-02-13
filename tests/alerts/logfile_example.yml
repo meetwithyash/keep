@@ -7,7 +7,7 @@ alert:
       provider:
           type: logfile
           with:
-            filename: examples/access.log
+            filename: tests/alerts/access.log
             time: 4d
       # use the condition on every result of the provider
       foreach:
@@ -18,8 +18,7 @@ alert:
           # each line looks like:
           # ' 64 2023-02-09 20:08:16,773 INFO: uvicorn.access -: 127.0.0.1:53948 - "GET /test2 HTTP/1.1" 503 Service Unavailable'
           # where the "64" is the number of the
-          compare_to: datetime_diff(nowutc(), utc({{ steps.this.results[0][0] }}))
-          # compare_to: "first(split({{ foreach.value }}, ' '))"
+          compare_to: "first(split({{ foreach.value }}, ' '))"
   # This happen for each
   actions:
     - name: paladin-slack
@@ -45,3 +44,8 @@ alert:
                 type: mrkdwn
                 text: |-
                   Full Error: `{{ foreach.value }}`
+providers:
+  slack-test:
+    description: Tests slack
+    authentication:
+      webhook_url: https://hooks.slack.com/services/test

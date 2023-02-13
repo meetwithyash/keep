@@ -20,7 +20,7 @@ class ConsoleProvider(BaseProvider):
         # No need to dispose of anything, so just do nothing.
         pass
 
-    def notify(self, **kwargs: dict):
+    def _notify(self, **kwargs: dict):
         """
         Output alert message simply using the print method.
 

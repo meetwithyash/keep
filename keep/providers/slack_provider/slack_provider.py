@@ -35,7 +35,7 @@ class SlackProvider(BaseProvider):
         """
         pass
 
-    def notify(self, **kwargs: dict):
+    def _notify(self, **kwargs: dict):
         """
         Notify alert message to Slack using the Slack Incoming Webhook API
         https://api.slack.com/messaging/webhooks

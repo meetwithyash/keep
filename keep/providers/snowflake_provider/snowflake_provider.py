@@ -84,7 +84,7 @@ class SnowflakeProvider(BaseProvider):
             **self.config.authentication
         )
 
-    def query(self, query: str, **kwargs: dict):
+    def _query(self, query: str, **kwargs: dict):
         """
         Query snowflake using the given query
 

@@ -1,3 +1,4 @@
+import datetime
 from itertools import groupby
 
 _len = len
@@ -25,3 +26,7 @@ def split(string, delimeter):
 
 def first(iterable):
     return iterable[0]
+
+
+def nowutc():
+    return datetime.datetime.utcnow()
